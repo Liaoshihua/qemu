@@ -94,8 +94,8 @@ static const MemMapEntry virt_memmap[] = {
     [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
     [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
     [VIRT_PCIE_ECAM] =    { 0x30000000,    0x10000000 },
-    [VIRT_PCIE_MMIO] =    { 0x40000000,    0x40000000 },
-    [VIRT_DRAM] =         { 0x80000000,           0x0 },
+    [VIRT_PCIE_MMIO] =    { 0x40000000,    0x20000000 },
+    [VIRT_DRAM] =         { 0x60000000,           0x0 },
 };
 
 /* PCIe high mmio is fixed for RV32 */
