@@ -70,7 +70,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
     RISCVExtStatus fs, vs;
     uint32_t flags = 0;
 
-    *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+    *pc = env->pc & UINT32_MAX;
     *cs_base = 0;
 
     if (cpu->cfg.ext_zve32f) {
@@ -189,6 +189,10 @@ void riscv_cpu_update_mask(CPURISCVState *env)
         env->cur_pmmask = mask;
         env->cur_pmbase = base;
     }
+
+#if TARGET_LONG_SIZE == 8
+    env->cur_pmmask = 0xffffffff00000000ULL;
+#endif
 }
 
 #ifndef CONFIG_USER_ONLY

@@ -1700,7 +1700,7 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
 #ifdef TARGET_RISCV32
 #define ELF_CLASS ELFCLASS32
 #else
-#define ELF_CLASS ELFCLASS64
+#define ELF_CLASS ELFCLASS32
 #endif
 
 #define ELF_HWCAP get_elf_hwcap()

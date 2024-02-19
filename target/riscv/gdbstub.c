@@ -56,7 +56,7 @@ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
     if (n < 32) {
         tmp = env->gpr[n];
     } else if (n == 32) {
-        tmp = env->pc;
+        tmp = env->pc & UINT32_MAX;
     } else {
         return 0;
     }
