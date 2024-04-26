@@ -471,7 +471,7 @@ static TCGv_i64 get_fpr_d(DisasContext *ctx, int reg_num)
         tcg_gen_concat_tl_i64(t, cpu_gpr[reg_num], cpu_gpr[reg_num + 1]);
         return t;
     }
-#ifdef TARGET_RISCV64
+#if defined(TARGET_RISCV64) || defined(TARGET_RISCV64ILP32)
     case MXL_RV64:
         return cpu_gpr[reg_num];
 #endif
@@ -493,7 +493,7 @@ static TCGv_i64 dest_fpr(DisasContext *ctx, int reg_num)
     switch (get_xl(ctx)) {
     case MXL_RV32:
         return tcg_temp_new_i64();
-#ifdef TARGET_RISCV64
+#if defined(TARGET_RISCV64) || defined(TARGET_RISCV64ILP32)
     case MXL_RV64:
         return cpu_gpr[reg_num];
 #endif

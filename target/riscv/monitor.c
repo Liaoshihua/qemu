@@ -37,7 +37,7 @@
 /* Perform linear address sign extension */
 static target_ulong addr_canonical(int va_bits, target_ulong addr)
 {
-#ifdef TARGET_RISCV64
+#if defined(TARGET_RISCV64) || defined(TARGET_RISCV64ILP32)
     if (addr & (1UL << (va_bits - 1))) {
         addr |= (hwaddr)-(1L << va_bits);
     }
