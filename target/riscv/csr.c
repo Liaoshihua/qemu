@@ -1377,7 +1377,7 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
     case MXL_RV32:
         misa = (target_ulong)MXL_RV32 << 30;
         break;
-#ifdef TARGET_RISCV64
+#if defined(TARGET_RISCV64) || defined(TARGET_RISCV64ILP32)
     case MXL_RV64:
         misa = (target_ulong)MXL_RV64 << 62;
         break;

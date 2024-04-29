@@ -420,7 +420,7 @@ static bool trans_fmv_x_w(DisasContext *ctx, arg_fmv_x_w *a)
 
     TCGv dest = dest_gpr(ctx, a->rd);
     TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-#if defined(TARGET_RISCV64)
+#if defined(TARGET_RISCV64) || defined(TARGET_RISCV64ILP32)
     tcg_gen_ext32s_tl(dest, src1);
 #else
     tcg_gen_extrl_i64_i32(dest, src1);

@@ -367,7 +367,7 @@ static void riscv_any_cpu_init(Object *obj)
     CPURISCVState *env = &cpu->env;
 #if defined(TARGET_RISCV32)
     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
-#elif defined(TARGET_RISCV64)
+#elif defined(TARGET_RISCV64) || defined(TARGET_RISCV64ILP32)
     set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
 #endif
 
@@ -386,7 +386,7 @@ static void riscv_any_cpu_init(Object *obj)
     cpu->cfg.pmp = true;
 }
 
-#if defined(TARGET_RISCV64)
+#if defined(TARGET_RISCV64) || defined(TARGET_RISCV64ILP32)
 static void rv64_base_cpu_init(Object *obj)
 {
     CPURISCVState *env = &RISCV_CPU(obj)->env;
@@ -613,7 +613,7 @@ static void riscv_host_cpu_init(Object *obj)
     CPURISCVState *env = &RISCV_CPU(obj)->env;
 #if defined(TARGET_RISCV32)
     set_misa(env, MXL_RV32, 0);
-#elif defined(TARGET_RISCV64)
+#elif defined(TARGET_RISCV64) || defined(TARGET_RISCV64ILP32)
     set_misa(env, MXL_RV64, 0);
 #endif
     riscv_cpu_add_user_properties(obj);
@@ -1040,7 +1040,7 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
 
     /* Validate that MISA_MXL is set properly. */
     switch (env->misa_mxl_max) {
-#ifdef TARGET_RISCV64
+#if defined(TARGET_RISCV64) || defined(TARGET_RISCV64ILP32)
     case MXL_RV64:
     case MXL_RV128:
         cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
@@ -2290,7 +2290,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32_sifive_e_cpu_init),
     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32_imafcu_nommu_cpu_init),
     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32_sifive_u_cpu_init),
-#elif defined(TARGET_RISCV64)
+#elif defined(TARGET_RISCV64) || defined(TARGET_RISCV64ILP32)
     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE64,   rv64_base_cpu_init),
     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
