@@ -1697,8 +1697,8 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
 #define ELF_START_MMAP 0x80000000
 #define ELF_ARCH  EM_RISCV
 
-#ifndef ABI_X32_P
-#define ABI_X32_P(e_flags) ((e_flags & EF_RISCV_X32) != 0)
+#ifndef ABI_N32_P
+#define ABI_N32_P(e_flags) ((e_flags & EF_RISCV_N32) != 0)
 #endif
 
 #if defined(TARGET_RISCV32) || defined(TARGET_RISCV64ILP32)
@@ -2063,7 +2063,7 @@ static bool elf_check_ident(struct elfhdr *ehdr)
             && ehdr->e_ident[EI_MAG2] == ELFMAG2
             && ehdr->e_ident[EI_MAG3] == ELFMAG3
             #ifdef TARGET_RISCV64ILP32
-            && ABI_X32_P(ehdr->e_flags)
+            && ABI_N32_P(ehdr->e_flags)
             #endif
             && ehdr->e_ident[EI_CLASS] == ELF_CLASS
             && ehdr->e_ident[EI_DATA] == ELF_DATA

@@ -1447,7 +1447,7 @@ typedef struct {
 #define EF_RISCV_FLOAT_ABI_QUAD   0x0006
 #define EF_RISCV_RVE              0x0008
 #define EF_RISCV_TSO              0x0010
-#define EF_RISCV_X32              0x0020
+#define EF_RISCV_N32              0x0020
 
 typedef struct elf32_rel {
   Elf32_Addr r_offset;
